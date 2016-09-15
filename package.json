@@ -1,0 +1,29 @@
+{
+    "author": "example",
+    "dependencies": {
+        "pebble-events": "^1.1.0",
+        "pebble-geocode-mapquest": "^1.0.1"
+    },
+    "keywords": [],
+    "name": "geocode",
+    "pebble": {
+        "displayName": "geocode",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": []
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk"
+        ],
+        "uuid": "71c9f8b6-49b8-4bb5-9137-9d73923bc36b",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "1.0.0"
+}
