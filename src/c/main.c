@@ -9,8 +9,6 @@ static char Location[]="Seattle, WA";
 static void geocode_fetch_callback(GeocodeMapquestCoordinates *coordinates, GeocodeMapquestStatus status) {
 /*  switch(status) {
     case GeocodeMapquestStatusAvailable: {*/
-      APP_LOG(APP_LOG_LEVEL_INFO, "latitude:%ld", coordinates->latitude);
-      APP_LOG(APP_LOG_LEVEL_INFO, "longitude:%ld", coordinates->longitude);
       static char s_buffer[256];
       snprintf(s_buffer, sizeof(s_buffer),"Location:\n%s\nLatitude:%ld\nLongitude:%ld\nGeoCode Status:%d",Location,coordinates->latitude,coordinates->longitude,status);
       text_layer_set_text(s_text_layer, s_buffer);
