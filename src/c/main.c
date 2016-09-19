@@ -7,11 +7,30 @@ static char APIKEY[]="tJsAZSQClbHE2pX451PUXw8XyLytiw7K";
 static char Location[]="Seattle, WA";
 
 static void geocode_fetch_callback(GeocodeMapquestCoordinates *coordinates, GeocodeMapquestStatus status) {
-  APP_LOG(APP_LOG_LEVEL_INFO, "latitude:%ld", coordinates->latitude);
-  APP_LOG(APP_LOG_LEVEL_INFO, "longitude:%ld", coordinates->longitude);
-  static char s_buffer[256];
-  snprintf(s_buffer, sizeof(s_buffer),"Location:\n%s\nLatitude:%ld\nLongitude:%ld",Location,coordinates->latitude,coordinates->longitude);
-  text_layer_set_text(s_text_layer, s_buffer);
+/*  switch(status) {
+    case GeocodeMapquestStatusAvailable: {*/
+      APP_LOG(APP_LOG_LEVEL_INFO, "latitude:%ld", coordinates->latitude);
+      APP_LOG(APP_LOG_LEVEL_INFO, "longitude:%ld", coordinates->longitude);
+      static char s_buffer[256];
+      snprintf(s_buffer, sizeof(s_buffer),"Location:\n%s\nLatitude:%ld\nLongitude:%ld\nGeoCode Status:%d",Location,coordinates->latitude,coordinates->longitude,status);
+      text_layer_set_text(s_text_layer, s_buffer);
+/*      } 
+    case GeocodeMapquestStatusBadKey:
+      text_layer_set_text(s_text_layer, "GeocodeMapquestStatusBadKey");
+      break;
+    case GeocodeMapquestStatusFailed:
+      text_layer_set_text(s_text_layer, "GeocodeMapquestStatusFailed");
+      break;
+    case GeocodeMapquestStatusNotYetFetched:
+      text_layer_set_text(s_text_layer, "GeocodeMapquestStatusNotYetFetched");
+      break;
+    case GeocodeMapquestStatusBluetoothDisconnected:
+      text_layer_set_text(s_text_layer, "GeocodeMapquestStatusBluetoothDisconnected");
+      break;
+    case GeocodeMapquestStatusPending:
+      text_layer_set_text(s_text_layer, "GeocodeMapquestStatusPending");
+      break;
+  }*/
 }
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context)
@@ -20,7 +39,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 	if(data)
 	{
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Ready Received! Requesting location.");
-		geocode_mapquest_fetch("Seattle, WA", geocode_fetch_callback);
+		geocode_mapquest_fetch(Location, geocode_fetch_callback);
 	}
 }
 
@@ -53,6 +72,7 @@ static void init(void) {
   geocode_mapquest_set_api_key(APIKEY);
   events_app_message_request_inbox_size(256);
 	events_app_message_register_inbox_received(inbox_received_callback, NULL);
+// I left these stubbed out as you really should have them, but I didn't want to add lines to the example code for these
 //	events_app_message_register_inbox_dropped(inbox_dropped_callback, NULL);
 //	events_app_message_register_outbox_failed(outbox_failed_callback, NULL);
 //	events_app_message_register_outbox_sent(outbox_sent_callback, NULL);
