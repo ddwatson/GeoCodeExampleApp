@@ -9,7 +9,9 @@
     "pebble": {
         "displayName": "geocode",
         "enableMultiJS": true,
-        "messageKeys": [],
+        "messageKeys": [
+            "READY"
+        ],
         "projectType": "native",
         "resources": {
             "media": []
